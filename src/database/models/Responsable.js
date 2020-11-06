@@ -1,20 +1,18 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const Responsable = sequelize.define('Responsable', {
+    const Responsable = sequelize.define('Responsables', {
         area:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         institucion:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         usuarioId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {         
-              model: 'Usuario',
+              model: 'Usuarios',
               key: 'id'
             }
         },        

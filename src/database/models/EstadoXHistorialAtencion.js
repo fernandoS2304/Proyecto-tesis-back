@@ -1,20 +1,18 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const EstadoXHistorialAtencion = sequelize.define('EstadoXHistorialAtencion', {
+    const EstadoXHistorialAtencion = sequelize.define('EstadoXHistorialAtenciones', {
         estadoId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {    
-              model: 'Estado',
+              model: 'Estados',
               key: 'id'
             }
         },
         historialAtencionId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {         
-              model: 'HistorialAtencion',
+              model: 'HistorialAtenciones',
               key: 'id'
             }
         },

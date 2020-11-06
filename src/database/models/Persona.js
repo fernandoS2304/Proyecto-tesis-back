@@ -1,34 +1,32 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const Persona = sequelize.define('Persona', {
+    const Persona = sequelize.define('Personas', {
         nombre:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         apellidoP:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         apellidoM:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         correo:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         telefono:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         fechaNacimiento:{
             allowNull: false,
-            type: Sequelize.DATE
+            type: DataTypes.DATE
         },
         dni:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },          
     });
     return Persona;

@@ -7,20 +7,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('express-async-errors');
 const helmet = require('helmet');
-
+const { errors } = require('celebrate');
 const useragent = require('express-useragent');
-const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
+//const cookieParser = require('cookie-parser');
 
 // routes
-/*const leadsRoutes = require('./src/routes/leads');
-const brandsRoutes = require('./src/routes/brands');
-const featuresRoutes = require('./src/routes/features');
-const paymentSimulatorRoutes = require('./src/routes/payment-simulator');
-const vehiclesRoutes = require('./src/routes/vehicles');
-const vehicleCategoriesRoutes = require('./src/routes/vehicles-category');
-const vehicleFeaturesRoutes = require('./src/routes/vehicles-features');
-const settingsRoutes = require('./src/routes/settings');
-*/
+const categoriaRoutes = require('./src/routes/categoria');
+const estadoRoutes = require('./src/routes/estado');
+const rolesRoutes = require('./src/routes/roles');
+const usuarioRoutes = require('./src/routes/usuario');
+const departamentosRoutes = require('./src/routes/departamentos');
+const provinciasRoutes = require('./src/routes/provincias');
+const distritosRoutes = require('./src/routes/distritos');
+const quejareclamoRoutes = require('./src/routes/quejareclamo');
+const historialatencionRoutes = require('./src/routes/historialatencion');
 
 try {
   require('fs').mkdirSync('./logs');
@@ -45,16 +46,19 @@ app.use(useragent.express());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(fileUpload());
 
-/*app.use('/leads', leadsRoutes);
-app.use('/brands', brandsRoutes);
-app.use('/features', featuresRoutes);
-app.use('/payment-simulator', paymentSimulatorRoutes);
-app.use('/vehicles', vehiclesRoutes);
-app.use('/vehicles-category', vehicleCategoriesRoutes);
-app.use('/vehicles-features', vehicleFeaturesRoutes);
-app.use('/settings', settingsRoutes);
-*/
+app.use('/categoria',categoriaRoutes);
+app.use('/estado',estadoRoutes);
+app.use('/roles',rolesRoutes);
+app.use('/usuario',usuarioRoutes);
+app.use('/departamentos',departamentosRoutes);
+app.use('/provincias',provinciasRoutes);
+app.use('/distritos',distritosRoutes);
+app.use('/quejareclamo',quejareclamoRoutes);
+app.use('/historialatencion',historialatencionRoutes);
+
+app.use(errors());
 
 const db = require('./src/models');
 

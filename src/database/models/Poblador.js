@@ -1,16 +1,14 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const Poblador = sequelize.define('Poblador', {
+    const Poblador = sequelize.define('Pobladores', {
         direccion:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         usuarioId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: 'Usuario',
+              model: 'Usuarios',
               key: 'id'
             }
         },

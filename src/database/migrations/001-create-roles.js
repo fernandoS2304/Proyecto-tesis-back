@@ -1,16 +1,18 @@
-const { Sequelize } = require("sequelize/types");
-
 module.exports = {
     async up(queryInterface, Sequelize){
-        await queryInterface.createTable('DocumentoGestion',{
+        await queryInterface.createTable('Roles',{
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            documento:{
-                allowNull: true,
+            nombre:{
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            descripcion:{
+                allowNull: false,
                 type: Sequelize.STRING
             },
             createdAt: {
@@ -24,6 +26,6 @@ module.exports = {
         })
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('DocumentoGestion');
+        return queryInterface.dropTable('Roles');
     }
 }

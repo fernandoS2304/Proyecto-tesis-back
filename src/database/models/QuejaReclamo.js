@@ -1,67 +1,64 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const QuejaReclamo = sequelize.define('QuejaReclamo', {
-        codigo:{
-            allowNull: false,
-            autoIncrement: true,
-            type: Sequelize.INTEGER
-        },
+    const QuejaReclamo = sequelize.define('QuejaReclamos', {
         titulo:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
+        },
+        direccion:{
+            allowNull: false,
+            type: DataTypes.STRING
         },
         departamento:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         provincia:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         distrito:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         sucesos:{
             allowNull: true,
-            type: Sequelize.TEXT
+            type: DataTypes.TEXT
         },
         fechaCreacion:{
             allowNull: false,
-            type: Sequelize.DATE
+            type: DataTypes.DATE
         },
         pobladorId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {        
-              model: 'Poblador',
+              model: 'Pobladores',
               key: 'id'
             }
         },
         evidenciasId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
+            type: DataTypes.INTEGER,
+            allowNull: true,
             references: {
               model: 'Evidencias',
               key: 'id'
             }
         },
         categoriaId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {         
-              model: 'Categoria',
+              model: 'Categorias',
               key: 'id'
             }
         },
         
     });
     QuejaReclamo.associate = function (models){
-        QuejaReclamo.belongsTo(models.Poblador,{foreignKey: 'pobladorId', as: 'poblador'})
+        QuejaReclamo.belongsTo(models.Pobladore,{foreignKey: 'pobladorId', as: 'poblador'})
     };
     QuejaReclamo.associate = function (models){
-        QuejaReclamo.belongsTo(models.Evidencias,{foreignKey: 'evidenciasId', as: 'evidencia'})
+        QuejaReclamo.belongsTo(models.Evidencia,{foreignKey: 'evidenciasId', as: 'evidencia'})
     };
     QuejaReclamo.associate = function (models){
         QuejaReclamo.belongsTo(models.Categoria,{foreignKey: 'categoriaId', as: 'categoria'})

@@ -1,14 +1,12 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const Estado = sequelize.define('Estado', {
+    const Estado = sequelize.define('Estados', {
         nombre:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         descripcion:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
     });
     Estado.associate = function (models){

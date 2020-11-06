@@ -1,8 +1,6 @@
-const { Sequelize } = require("sequelize/types");
-
 module.exports = {
     async up(queryInterface, Sequelize){
-        await queryInterface.createTable('HistorialAtencion',{
+        await queryInterface.createTable('HistorialAtenciones',{
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -10,12 +8,12 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             fechaInicio:{
-                allowNull: false,
-                type:Sequelize.DATE
+                allowNull: true,
+                type: Sequelize.DATE
             },
             fechaFin:{
                 allowNull: true,
-                type:Sequelize.DATE
+                type: Sequelize.DATE
             },
             comentario:{
                 allowNull: true,
@@ -25,15 +23,16 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
-                  model: 'Responsable',
+                  model: 'Responsables',
                   key: 'id'
                 }
             },
             quejaReclamoId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                unique: false,
                 references: {         
-                  model: 'QuejaReclamo',
+                  model: 'QuejaReclamos',
                   key: 'id'
                 }
             },
@@ -41,7 +40,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: true,
                 references: {         
-                  model: 'DocumentoGestion',
+                  model: 'DocumentoGestiones',
                   key: 'id'
                 }
             },    
@@ -56,6 +55,6 @@ module.exports = {
         })
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('HistorialAtencion');
+        return queryInterface.dropTable('HistorialAtenciones');
     }
 }

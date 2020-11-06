@@ -1,25 +1,23 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const Usuario = sequelize.define('Usuario', {
+    const Usuario = sequelize.define('Usuarios', {
         nombreUsuario:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
-        contraseña:{
+        contrasena:{
             allowNull: false,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         personaId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {         
-              model: 'Persona',
+              model: 'Personas',
               key: 'id'
             }
         },
         rolesId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {         
               model: 'Roles',
@@ -31,7 +29,7 @@ module.exports = (sequelize,DataTypes) => {
         Usuario.belongsTo(models.Persona,{foreignKey: 'personaId', as: 'persona'})
     };
     Usuario.associate = function (models){
-        Usuario.belongsTo(models.Roles,{foreignKey: 'rolesId', as: 'roles'})
+        Usuario.belongsTo(models.Rol,{foreignKey: 'rolesId', as: 'rol'})
     };
     return Usuario;
 }

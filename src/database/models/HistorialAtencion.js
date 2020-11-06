@@ -1,40 +1,39 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const HistorialAtencion = sequelize.define('HistorialAtencion', {
+    const HistorialAtencion = sequelize.define('HistorialAtenciones', {
         fechaInicio:{
-            allowNull: false,
-            type:Sequelize.DATE
+            allowNull: true,
+            type: DataTypes.DATE
         },
         fechaFin:{
             allowNull: true,
-            type:Sequelize.DATE
+            type: DataTypes.DATE
         },
         comentario:{
             allowNull: true,
-            type: Sequelize.TEXT
+            type: DataTypes.TEXT
         },
         responsableId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-              model: 'Responsable',
+              model: 'Responsables',
               key: 'id'
             }
         },
         quejaReclamoId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
+            unique: false,
             references: {         
-              model: 'QuejaReclamo',
+              model: 'QuejaReclamos',
               key: 'id'
             }
         },
         documentoGestionId: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: true,
             references: {         
-              model: 'DocumentoGestion',
+              model: 'DocumentoGestiones',
               key: 'id'
             }
         },
@@ -43,7 +42,7 @@ module.exports = (sequelize,DataTypes) => {
         HistorialAtencion.belongsTo(models.Responsable,{foreignKey: 'responsableId', as: 'responsable'})
     };
     HistorialAtencion.associate = function (models){
-        HistorialAtencion.belongsTo(models.QuejaReclamo,{foreignKey: 'quejaReclamoId', as: 'quejareclamo'})
+        HistorialAtencion.belongsTo(models.QuejaReclamo,{foreignKey: 'quejaReclamoId', as: 'quejareclamo', primaryKey: false, constraints: true})
     };
     HistorialAtencion.associate = function (models){
         HistorialAtencion.belongsTo(models.DocumentoGestion,{foreignKey: 'documentoGestionId', as: 'documentogestion'})

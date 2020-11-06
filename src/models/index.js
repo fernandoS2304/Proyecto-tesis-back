@@ -33,14 +33,17 @@ fs.readdirSync(path.join(__dirname, '../database/models'))
 db.Categoria = require('../database/models/Categoria')(sequelize,Sequelize);
 db.DocumentoGestion = require('../database/models/DocumentoGestion')(sequelize,Sequelize);
 db.Estado = require('../database/models/Estado')(sequelize,Sequelize);
-db.EstadoXHistoriaAtencion = require('../database/models/EstadoXHistoriaAtencion')(sequelize,Sequelize);
-db.Evidencias = require('../database/models/Evidencias')(sequelize,Sequelize);
+db.EstadoXHistoriaAtencion = require('../database/models/EstadoXHistorialAtencion')(sequelize,Sequelize);
+db.Evidencia = require('../database/models/Evidencia')(sequelize,Sequelize);
 db.HistorialAtencion = require('../database/models/HistorialAtencion')(sequelize,Sequelize);
 db.Persona = require('../database/models/Persona')(sequelize,Sequelize);
 db.Poblador = require('../database/models/Poblador')(sequelize,Sequelize);
 db.QuejaReclamo = require('../database/models/QuejaReclamo')(sequelize,Sequelize);
 db.Responsable = require('../database/models/Responsable')(sequelize,Sequelize);
-db.Roles = require('../database/models/Roles')(sequelize,Sequelize);
+db.Rol = require('../database/models/Rol')(sequelize,Sequelize);
 db.Usuario = require('../database/models/Usuario')(sequelize,Sequelize);
+db.Departamentos = require('../database/models/Departamentos')(sequelize,Sequelize);
+db.Provincias = require('../database/models/Provincias')(sequelize,Sequelize);
+db.Distritos = require('../database/models/Distritos')(sequelize,Sequelize);
 
 module.exports = db;

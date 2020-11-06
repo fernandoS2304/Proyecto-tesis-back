@@ -1,20 +1,17 @@
-const { Sequelize } = require("sequelize/types");
-
 module.exports = {
     async up(queryInterface, Sequelize){
-        await queryInterface.createTable('QuejaReclamo',{
+        await queryInterface.createTable('QuejaReclamos',{
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            codigo:{
-                allowNull: false,
-                autoIncrement: true,
-                type: Sequelize.INTEGER
-            },
             titulo:{
+                allowNull: false,
+                type: Sequelize.STRING
+            },
+            direccion:{
                 allowNull: false,
                 type: Sequelize.STRING
             },
@@ -42,13 +39,13 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {        
-                  model: 'Poblador',
+                  model: 'Pobladores',
                   key: 'id'
                 }
             },
             evidenciasId: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
+                allowNull: true,
                 references: {
                   model: 'Evidencias',
                   key: 'id'
@@ -58,7 +55,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {         
-                  model: 'Categoria',
+                  model: 'Categorias',
                   key: 'id'
                 }
             },
@@ -73,6 +70,6 @@ module.exports = {
         })
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('QuejaReclamo');
+        return queryInterface.dropTable('QuejaReclamos');
     }
 }

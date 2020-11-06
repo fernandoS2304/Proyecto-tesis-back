@@ -1,38 +1,31 @@
-const { Sequelize } = require("sequelize/types");
-
-module.exports = {
+module.exports={
     async up(queryInterface, Sequelize){
-        await queryInterface.createTable('Usuario',{
-            id: {
+        await queryInterface.createTable('Distritos',{
+            id:{
                 allowNull: false,
-                autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING,
             },
-            nombreUsuario:{
+            nombre:{
                 allowNull: false,
                 type: Sequelize.STRING
             },
-            contraseña:{
-                allowNull: false,
-                type: Sequelize.STRING
-            },
-            personaId: {
-                type: Sequelize.INTEGER,
+            provinciaId:{
+                type: Sequelize.STRING,
                 allowNull: false,
                 references: {         
-                  model: 'Persona',
+                  model: 'Provincias',
                   key: 'id'
                 }
             },
-            rolesId: {
-                type: Sequelize.INTEGER,
+            departamentoId:{
+                type: Sequelize.STRING,
                 allowNull: false,
                 references: {         
-                  model: 'Roles',
+                  model: 'Departamentos',
                   key: 'id'
                 }
-            },
+            },    
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
@@ -40,10 +33,10 @@ module.exports = {
               updatedAt: {
                 allowNull: false,
                 type: Sequelize.DATE
-            }
+            },
         })
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('Usuario');
+        return queryInterface.dropTable('Distritos');
     }
 }

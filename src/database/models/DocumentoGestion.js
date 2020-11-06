@@ -1,10 +1,12 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
-
 module.exports = (sequelize,DataTypes) => {
-    const DocumentoGestion = sequelize.define('DocumentoGestion', {
+    const DocumentoGestion = sequelize.define('DocumentoGestiones', {
+        titulo:{
+            allowNull: true,
+            type: DataTypes.STRING
+        },
         documento:{
             allowNull: true,
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
     });
     return DocumentoGestion;

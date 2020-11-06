@@ -1,5 +1,3 @@
-const { Sequelize } = require("sequelize/types");
-
 module.exports = {
     async up(queryInterface, Sequelize){
         await queryInterface.createTable('Evidencias',{
@@ -8,6 +6,10 @@ module.exports = {
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
+            },
+            titulo:{
+                allowNull: true,
+                type: Sequelize.STRING
             },
             documento:{
                 allowNull: true,

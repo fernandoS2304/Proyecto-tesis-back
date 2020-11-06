@@ -1,8 +1,6 @@
-const { Sequelize } = require("sequelize/types");
-
 module.exports = {
     async up(queryInterface, Sequelize){
-        await queryInterface.createTable('Responsable',{
+        await queryInterface.createTable('Responsables',{
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -21,7 +19,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {         
-                  model: 'Usuario',
+                  model: 'Usuarios',
                   key: 'id'
                 }
             },
@@ -36,6 +34,6 @@ module.exports = {
         })
     },
     down: (queryInterface) => {
-        return queryInterface.dropTable('Responsable');
+        return queryInterface.dropTable('Responsables');
     }
 }
