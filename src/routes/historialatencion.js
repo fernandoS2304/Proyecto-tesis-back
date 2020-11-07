@@ -13,5 +13,6 @@ router.put('/cancelar',HistorialAtencion.cancelarTicket); /* /historialatencion/
 router.put('/guardar',HistorialAtencion.guardarGestion); /* /historialatencion/guardar */
 router.get('/:idQuejaReclamo', HistorialAtencion.listarHistorialAtencion); /* /historialatencion/{idQuejaReclamo} */
 router.put('/asignarNuevoResponsable',HistorialAtencion.cambiarUsuarioResponsable); /* /historialatencion/asignarNuevoResponsable */
+router.put('/guardardocgestion',HistorialAtencion.guardarDocGestion); /* /historialatencion/guardardocgestion/ */
 
 module.exports = router;

@@ -22,6 +22,7 @@ const provinciasRoutes = require('./src/routes/provincias');
 const distritosRoutes = require('./src/routes/distritos');
 const quejareclamoRoutes = require('./src/routes/quejareclamo');
 const historialatencionRoutes = require('./src/routes/historialatencion');
+const evidenciaRoutes = require('./src/routes/evidencia');
 
 try {
   require('fs').mkdirSync('./logs');
@@ -57,6 +58,7 @@ app.use('/provincias',provinciasRoutes);
 app.use('/distritos',distritosRoutes);
 app.use('/quejareclamo',quejareclamoRoutes);
 app.use('/historialatencion',historialatencionRoutes);
+app.use('/evidencia',evidenciaRoutes);
 
 app.use(errors());
 

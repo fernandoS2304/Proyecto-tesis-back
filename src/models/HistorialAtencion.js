@@ -111,4 +111,23 @@ HistorialAtencion.ListarByHistorialId = async function (idHistorialAtencion,idRe
     return HistorialAtencion.findOne({where:{id:idHistorialAtencion, responsableId:idResponsable}})
 };
 
+HistorialAtencion.GuardarDocGestion = async function (payload){
+    try{
+        return await HistorialAtencion.update(
+            {
+                documentoGestionId: payload.idDocumentoGestion,
+            },
+            {
+                where: {
+                    id: payload.id,
+                }
+            }
+        )
+    }catch(error){
+        console.log("Update evidencias", error);
+        return null;
+    }
+}
+
+
 module.exports = HistorialAtencion;

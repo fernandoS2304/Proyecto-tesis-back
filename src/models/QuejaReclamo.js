@@ -19,4 +19,22 @@ QuejaReclamo.ListarQuejaReclamoResponsable = async function (idQuejaReclamo){
     return await QuejaReclamo.findOne({where:{id:idQuejaReclamo}});
 };
 
+QuejaReclamo.GuardarEvidencia = async function (payload){
+    try{
+        return await QuejaReclamo.update(
+            {
+                evidenciasId: payload.idEvidencia,
+            },
+            {
+                where: {
+                    id: payload.id,
+                }
+            }
+        )
+    }catch(error){
+        console.log("Update evidencias", error);
+        return null;
+    }
+}
+
 module.exports = QuejaReclamo;

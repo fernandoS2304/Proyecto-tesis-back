@@ -30,7 +30,7 @@ exports.uploadToS3 = async function(file, response){
             }
             console.log('success');
             console.log(data);
-            return response.status(httpStatus.OK).json({message: 'OK', payload: data.Location});
+            return response.status(httpStatus.OK).json({message: 'OK', payload: data});
         });
         // console.log("response -> s3", response);
         // return response;

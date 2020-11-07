@@ -6,6 +6,7 @@ const EstadoXHistorialAtencion = require('../models/EstadoHistorialAtencion');
 const Responsable = require('../models/Responsable');
 const Usuario = require('../models/Usuario');
 const Persona = require('../models/Persona');
+const Evidencia = require('../models/Evidencias');
 const Email = require('./transporter-factory');
 const EnviarArchivo = require('./EnvioDeArchivo');
 const templateEmailPoblador = require('./tamplateCrearQuejaUsuario');   
@@ -97,16 +98,31 @@ module.exports = {
         });        
     },
     
+    /* archivos al s3 */
     async guardarArchivo(request,response){
-        // const file = request.body;
-        // const file = request.files.file;
-        //console.log(JSON.stringify(request.files.data));
         const file = request.files.data
         
         EnviarArchivo.uploadToS3(file, response);
-        // setTimeout(async ()=> {
-        //     console.log("guardarArchivo -> rpta", rpta)
-        //     return response.status(httpStatus.OK).json({message: 'OK', payload: rpta === null ? null : rpta});
-        // },10000);
-    }
+    },
+
+    async guardarEvidencia(request,response){
+        const data = request.body;
+        let evidencia = {};
+        evidencia.titulo = data.fileName;
+        evidencia.documento = data.link;
+        
+        const rpta = await Evidencia.CrearEvidencia(evidencia);
+
+        let guardar = {}
+        guardar.idEvidencia = rpta.id;
+        guardar.id = data.id;
+        
+        const rpta2 = await QuejaReclamo.GuardarEvidencia(guardar);
+
+        return response.status(httpStatus.OK).json({
+            message: 'OK',
+            payload: rpta2,
+        });
+    },   
+
 }

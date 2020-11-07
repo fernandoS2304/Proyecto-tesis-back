@@ -4,6 +4,7 @@ const Responsable = require('../models/Responsable');
 const EstadoHistorialAtencion = require('../models/EstadoHistorialAtencion');
 const Usuario = require('../models/Usuario');
 const Persona = require('../models/Persona');
+const DocumentoGestion = require('../models/DocumentoGestion');
 const Email = require('./transporter-factory');
 const templateEmailResponsable = require('./templateAsignarResponsable');
 
@@ -148,7 +149,15 @@ module.exports = {
             data[i].dataValues.nombre = pers.nombre
             data[i].dataValues.apellidoP = pers.apellidoP
             data[i].dataValues.apellidoM = pers.apellidoM
-            
+
+            const docG = await DocumentoGestion.ObtenerDocGestion(data[i].documentoGestionId);
+            if(docG === null){
+                data[i].dataValues.fileName = ''
+                data[i].dataValues.link = '#'
+            }else{
+                data[i].dataValues.fileName = docG.titulo
+                data[i].dataValues.link = docG.documento
+            }
         }
 
         return response.status(httpStatus.OK).json({
@@ -156,6 +165,8 @@ module.exports = {
             payload: data === null ? [] : data,
         });
     },
+
+    
 
     async cambiarUsuarioResponsable(request, response){
         let data = request.body;
@@ -193,5 +204,26 @@ module.exports = {
             message: rpta !== null ? 'OK' : 'BAD',
             payload: nombre,
         });
-    }
+    },
+
+    async guardarDocGestion(request,response){
+        const data = request.body;
+        let docGestion = {};
+        docGestion.titulo = data.fileName;
+        docGestion.documento = data.link;
+        
+        const rpta = await DocumentoGestion.CrearDocGestion(docGestion);
+
+        let guardar = {}
+        guardar.idDocumentoGestion = rpta.id;
+        guardar.id = data.id;
+        
+        const rpta2 = await HistorialAtencion.GuardarDocGestion(guardar);
+
+        return response.status(httpStatus.OK).json({
+            message: 'OK',
+            payload: rpta2,
+        });
+    },
+
 }
