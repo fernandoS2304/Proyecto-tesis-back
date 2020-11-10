@@ -1,9 +1,9 @@
 const AWS = require('aws-sdk');
 const httpStatus = require('http-status-codes');
 
-const BUCKET_NAME = 'repoarchtesis';
-const IAM_USER_KEY = 'AKIATYJMBWNABBF3BJZC';
-const IAM_USER_SECRET = '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';
+const BUCKET_NAME = 'xxxxxxxxxx';
+const IAM_USER_KEY = 'xxxxxxxxxxx';
+const IAM_USER_SECRET = 'xxxxxxxxxxxxxxxxxxxxx';
 
 exports.uploadToS3 = async function(file, response){
     //console.log('FILE: ', file);
